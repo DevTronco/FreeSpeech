@@ -1,12 +1,13 @@
 import os  
 import sys
+import shutil
 
 class setup:
     @staticmethod
     def pip_checker():
-        pip_path = os.path.join(sys.exec_prefix, 'Scripts')
+        pip_path = shutil.which("pip")
 
-        if os.path.exists(pip_path):
+        if pip_path:
             print(f"Path found: {pip_path}")
             return True
         else:
@@ -15,6 +16,11 @@ class setup:
         
     @staticmethod
     def modules_installer():
-        os.system("pip install cryptography")
-        os.system("pip install requests")
-        os.system("pip install ")
+        pip = shutil.which("pip") or shutil.which("pip3")
+        if not pip:
+            print("Error: pip not found")
+            return
+        
+        packages = ["cryptography", "flask", "requests", "p2pnetwork"]
+        for pkg in packages:
+            os.system(f"{pip} install {pkg}")
