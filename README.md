@@ -16,3 +16,7 @@ DISCLAIMER: I do NOT redeem any responsability from any malicious or illegal usa
 
 WELCOME TO FREESPEECH, A DECENTRALIZED AND ANONIMOUS CHAT SERVICE!
 
+To install:
+    1 - run the command "pip install -r requirements.txt"
+    2 - run the main.py file
+    3 digit 'help' to see the commands
