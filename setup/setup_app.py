@@ -21,6 +21,6 @@ class setup:
             print("Error: pip not found")
             return
         
-        packages = ["cryptography", "flask", "requests", "p2pnetwork"]
+        packages = ["cryptography", "requests", "p2pnetwork"]
         for pkg in packages:
             os.system(f"{pip} install {pkg}")
