@@ -2,21 +2,17 @@ import os
 import sys
 import platform
 
-setup_path = os.path.join(os.path.dirname(__file__), "setup")
-sys.path.append(setup_path)
+server_path = os.path.join(os.path.dirname(__file__), "server")
+sys.path.append(server_path)
 
-from setup import setup_app
+
+from server import create_localhost, connect_client
 
 def cls_console():
     if platform.system() == "Windows":
         os.system("cls")
     else:
         os.system("clear") 
-
-
-setup_app.setup.pip_checker()
-setup_app.setup.modules_installer()
-cls_console()
 
 print("Welcome to FreeSpeech!")
 print("Made with love by Tronco. https://github.com/DevTronco")
@@ -29,7 +25,7 @@ while True:
         print("""
         -help: you just did it
         -version: shows FreeSpeech current version
-        -join <invite_link>: joins server from invite link  
+        -join: joins server from invite link  
         -leave: leaves the server
         -cls: clears the console
         -create: goes to server creation menu
@@ -45,6 +41,13 @@ while True:
         break
     elif user_cmd.lower() == "version":
         print("FreeSpeech version: beta 0.0.1.")
+    elif user_cmd.lower() == "create":
+        cls_console()
+        create_localhost.initialize()
+    elif user_cmd.lower() == "join":
+        link = str(input("enter here the invite link (example: freespeech/server/very_good_server): "))
+        connect_client(link)
+
     else:
         print("Command not found.")
         continue

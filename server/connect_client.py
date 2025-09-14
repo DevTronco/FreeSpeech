@@ -1,11 +1,7 @@
 import socket
 import threading
-
-HOST = '127.0.0.1'
-PORT = 50000
-
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect((HOST, PORT))
+import random
+import create_localhost
 
 def receive():
     while True:
@@ -22,9 +18,17 @@ def send():
         message = input()
         client.send(message.encode('utf-8'))
 
-#thread start
-recv_thread = threading.Thread(target=receive)
-recv_thread.start()
+def connect_through_link(link):
+    PORT = random.randint(50000, 65535)
 
-send_thread = threading.Thread(target=send)
-send_thread.start()
+    global client
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect((link, create_localhost.PORT))
+
+    recv_thread = threading.Thread(target=receive)
+    recv_thread.start()
+
+    send_thread = threading.Thread(target=send)
+    send_thread.start()
+
+connect_through_link(create_localhost.HOST)
